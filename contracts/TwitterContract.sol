@@ -38,6 +38,19 @@ contract TwitterContract{
         // return result;
     }
 
-    
+    // a func called getMyTweets
+    {
+        // same as getAllTweets, just make sure it returns only those tweets 
+        // whose address matches the address user called this function
+    }
+
+    // a func called deleteTweet takes tweetId and isDelete
+    {
+        // check if it has right owner
+
+        // set isDelete
+
+        // emit the event called DeleteTweet with tweetId and isDelete
+    }
 
 }

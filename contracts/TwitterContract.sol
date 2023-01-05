@@ -40,16 +40,29 @@ contract TwitterContract{
 
 
     // a func called getAllTweets
-    {
+    function getAllTweets() view external returns(Tweet[] memory){
         // create a temp memory for Tweet[] of len tweets.length
+        Tweet[] memory temporary = new Tweet[](tweets.length);
 
         // start counter
+        uint counter = 0;
         // store all the tweet which has isDeleted as false in temp memory
+        for (uint i = 0; i < temporary.length; i++) {
+            if (tweets[i].isDeleted == false){
+                temporary.push(tweets[i]);
+                counter += 1;
+            }
+        }
 
         // create a result memory for Tweet[] of len counter
-        // store all tweets from temp to result
+        Tweet[] memory result = new Tweet[](counter);
 
-        // return result;
+        // store all tweets from temp to result
+        for(uint i=0; i<counter; i++) {
+            result[i] = temporary[i];
+        }
+
+        return result;
     }
 
     // a func called getMyTweets

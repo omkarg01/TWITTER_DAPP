@@ -1,8 +1,7 @@
 // SPDX-License-Identifier: UNLICENSED
 pragma solidity ^0.8.9;
 
-contract TwitterContract{
-
+contract TwitterContract {
     // create a struct Tweet field id, address, tweetText, isDeleted
     struct Tweet {
         uint tweetId;
@@ -19,16 +18,15 @@ contract TwitterContract{
     Tweet[] private tweets;
 
     // a map of tweet id to owner address
-    mapping (uint => address) tweetToOwner;
-
+    mapping(uint => address) tweetToOwner;
 
     // a func called addTweet takes tweetText and isDeleted (this func will called from frontend - externally)
-    function addTweet(string memory tweetText, bool isDeleted) externally {
+    function addTweet(string memory tweetText, bool isDeleted) external {
         // set tweetId
         uint tweetId = tweets.length;
 
         // creat a Tweet Object and push it in tweets
-        Tweet tweet = Tweet(tweetId, msg.sender, tweetText, isDeleted);
+        Tweet memory tweet = Tweet(tweetId, msg.sender, tweetText, isDeleted);
         tweets.push(tweet);
 
         // map tweetId with its owner address
@@ -38,18 +36,17 @@ contract TwitterContract{
         emit AddTweet(msg.sender, tweetId);
     }
 
-
     // a func called getAllTweets
-    function getAllTweets() view external returns(Tweet[] memory){
+    function getAllTweets() external view returns (Tweet[] memory) {
         // create a temp memory for Tweet[] of len tweets.length
         Tweet[] memory temporary = new Tweet[](tweets.length);
 
         // start counter
         uint counter = 0;
         // store all the tweet which has isDeleted as false in temp memory
-        for (uint i = 0; i < temporary.length; i++) {
-            if (tweets[i].isDeleted == false){
-                temporary.push(tweets[i]);
+        for (uint i = 0; i < tweets.length; i++) {
+            if (tweets[i].isDeleted == false) {
+                temporary[counter] = tweets[i];
                 counter += 1;
             }
         }
@@ -58,7 +55,7 @@ contract TwitterContract{
         Tweet[] memory result = new Tweet[](counter);
 
         // store all tweets from temp to result
-        for(uint i=0; i<counter; i++) {
+        for (uint i = 0; i < counter; i++) {
             result[i] = temporary[i];
         }
 
@@ -66,18 +63,42 @@ contract TwitterContract{
     }
 
     // a func called getMyTweets
-    {
-        // same as getAllTweets, just make sure it returns only those tweets 
+    function getMyTweets() external view returns (Tweet[] memory) {
+        // same as getAllTweets, just make sure it returns only those tweets
         // whose address matches the address user called this function
+        // create a temp memory for Tweet[] of len tweets.length
+        Tweet[] memory temporary = new Tweet[](tweets.length);
+
+        // start counter
+        uint counter = 0;
+        // store all the tweet which has isDeleted as false in temp memory
+        for (uint i = 0; i < tweets.length; i++) {
+            if (tweetToOwner[i] == msg.sender && tweets[i].isDeleted == false) {
+                temporary[counter] = tweets[i];
+                counter += 1;
+            }
+        }
+
+        // create a result memory for Tweet[] of len counter
+        Tweet[] memory result = new Tweet[](counter);
+
+        // store all tweets from temp to result
+        for (uint i = 0; i < counter; i++) {
+            result[i] = temporary[i];
+        }
+
+        return result;
     }
 
     // a func called deleteTweet takes tweetId and isDelete
-    {
+    function deleteTweet(uint tweetId, bool isDeleted) external {
         // check if it has right owner
+        if (tweetToOwner[tweetId] == msg.sender) {
+            // set isDelete
+            tweets[tweetId].isDeleted = isDeleted;
 
-        // set isDelete
-
-        // emit the event called DeleteTweet with tweetId and isDelete
+            // emit the event called DeleteTweet with tweetId and isDelete
+            emit DeleteTweet(tweetId, isDeleted);
+        }
     }
-
 }

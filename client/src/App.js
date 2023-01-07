@@ -1,5 +1,8 @@
 import './App.css';
 import { useState, useEffect } from 'react';
+import Sidebar from './Sidebar';
+import Feed from './Feed';
+import Widgets from './Widgets';
 
 function App() {
 
@@ -57,10 +60,9 @@ function App() {
                 </button>
             ) : correctNetwork ? (
                 <div className="app">
-                    {/* <Sidebar />
-                    <Feed />
+                    <Sidebar />
+                    {/* <Feed />
                     <Widgets /> */}
-                    <p>Connected</p>
                 </div>
             ) : (
                 <div className='flex flex-col justify-center items-center mb-20 font-bold text-2xl gap-y-3'>

@@ -61,8 +61,8 @@ function App() {
             ) : correctNetwork ? (
                 <div className="app">
                     <Sidebar />
-                    {/* <Feed />
-                    <Widgets /> */}
+                    <Feed />
+                    <Widgets />
                 </div>
             ) : (
                 <div className='flex flex-col justify-center items-center mb-20 font-bold text-2xl gap-y-3'>

@@ -13,7 +13,7 @@ const Feed = () => {
         let updatedTweets = [];
         // Here we set a personal flag around the tweets
         for (let i = 0; i < allTweets.length; i++) {
-            if (allTweets[i].username.toLowerCase() == address.toLowerCase()) {
+            if (allTweets[i].username.toLowerCase() === address.toLowerCase()) {
                 let tweet = {
                     'id': allTweets[i].tweetId,
                     'tweetText': allTweets[i].tweetText,
@@ -72,7 +72,7 @@ const Feed = () => {
                     signer
                 );
 
-                let deleteTweetTx = await TwitterContract.deleteTweet(key, true);
+                await TwitterContract.deleteTweet(key, true);
                 let allTweets = await TwitterContract.getAllTweets();
                 setPosts(getUpdatedTweets(allTweets, ethereum.selectedAddress));
             } else {

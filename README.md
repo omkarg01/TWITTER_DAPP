@@ -51,6 +51,5 @@ To run this project, you will need to add the following environment variables to
 `ACCOUNT_PRIVATE_KEY`
 
 `ALCHEMY_API_URL`
->>>>>>> f66f98cb43487809f347d97a752ef9b438b9cb87
 
 

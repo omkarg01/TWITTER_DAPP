@@ -3,7 +3,6 @@ import "./Widgets.css";
 import {
     TwitterTimelineEmbed,
     TwitterShareButton,
-    TwitterTweetEmbed,
 } from "react-twitter-embed";
 import SearchIcon from "@material-ui/icons/Search";
 
@@ -20,7 +19,7 @@ const Widgets = () => {
 
                 <TwitterTimelineEmbed
                     sourceType="profile"
-                    screenName="kmmtmm92"
+                    screenName="imVkohli"
                     options={{ height: 800 }}
                 />
 

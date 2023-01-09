@@ -1,9 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import TweetBox from './TweetBox'
-import FlipMove from "react-flip-move";
 import Post from "./Post";
 import "./Feed.css";
-import axios from 'axios';
 import { TwitterContractAddress } from './config.js';
 import { ethers } from 'ethers';
 import Twitter from './utils/TwitterContract.json'
@@ -17,7 +15,7 @@ const Feed = () => {
         for (let i = 0; i < allTweets.length; i++) {
             if (allTweets[i].username.toLowerCase() == address.toLowerCase()) {
                 let tweet = {
-                    'id': allTweets[i].id,
+                    'id': allTweets[i].tweetId,
                     'tweetText': allTweets[i].tweetText,
                     'isDeleted': allTweets[i].isDeleted,
                     'username': allTweets[i].username,
@@ -59,7 +57,7 @@ const Feed = () => {
     }
 
     const deleteTweet = key => async () => {
-        console.log(key);
+        console.log("key", key);
 
         // Now we got the key, let's delete our tweet
         try {
@@ -82,7 +80,7 @@ const Feed = () => {
             }
 
         } catch (error) {
-            console.log(error);
+            console.log("Error", error);
         }
     }
 
@@ -99,17 +97,15 @@ const Feed = () => {
 
             <TweetBox />
 
-            <FlipMove>
-                {posts.map((post) => (
-                    <Post
-                        key={post.id}
-                        displayName={post.username}
-                        text={post.tweetText}
-                        personal={post.personal}
-                        onClick={deleteTweet(post.id)}
-                    />
-                ))}
-            </FlipMove>
+            {posts.map((post) => (
+                < Post
+                    key={post.id}
+                    displayName={post.username}
+                    text={post.tweetText}
+                    personal={post.personal}
+                    onClick={deleteTweet(post.id)}
+                />
+            ))}
         </div>
     )
 }

@@ -1,13 +1,56 @@
-## Twitter DApp [Live Link](https://twitterr-dapp.netlify.app/)
+# Twitter DApp
 
-![name](https://img.shields.io/badge/Omkar--Gujja-OG)
+A Decentralized Twitter, a micro bloging platform.
+## Screenshots
 
----
-#### Preview
+![Preview](https://user-images.githubusercontent.com/67428719/211362678-3feac57a-a2e9-4b95-b88e-2569ac1ee6a1.png)
 
-![Desktop](./ss/preveiw.png)
+## Demo
 
----
-- Tech Stacks
+[Live Link](https://twitterr-dapp.netlify.app/)
+
+
+## Tech Stack
+
+**Client:** React
+
+**Server:** Solidity
+
+
+## Run Locally
+
+Clone the project
+
+```bash
+  git clone git@github.com:omkarg01/TWITTER_DAPP.git
+```
+
+Go to the project directory
+
+```bash
+  cd TWITTER_DAPP
+```
+
+Install dependencies
+
+```bash
+  npm install
+```
+
+Start the server
+
+```bash
+  npm run start
+```
+
+
+## Environment Variables
+
+To run this project, you will need to add the following environment variables to your .env file
+
+`ACCOUNT_PRIVATE_KEY`
+
+`ALCHEMY_API_URL`
+>>>>>>> f66f98cb43487809f347d97a752ef9b438b9cb87
 
 
